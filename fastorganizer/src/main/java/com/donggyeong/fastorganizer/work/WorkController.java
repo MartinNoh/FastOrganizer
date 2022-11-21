@@ -51,6 +51,7 @@ public class WorkController {
 		return "work_list";
 	}
 	*/
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping("/list")
 	public String list(Model model, @RequestParam(value="page", defaultValue = "0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
 		Page<Work> paging = this.workService.getList(page, kw);

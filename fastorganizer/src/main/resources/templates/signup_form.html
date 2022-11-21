@@ -1,29 +1,56 @@
 <html layout:decorate="~{layout}">
-<div layout:fragment="content" class="container my-3">
-    <div class="my-3 border-bottom">
-        <div>
-            <h4>회원가입</h4>
-        </div>
-    </div>
-    <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
-        <div th:replace="form_errors :: formErrorsFragment"></div>
-        <div class="mb-3">
-            <label for="email" class="form-label">이메일</label>
-            <input type="email" th:field="*{email}" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="password1" class="form-label">비밀번호</label>
-            <input type="password" th:field="*{password1}" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="password2" class="form-label">비밀번호 확인</label>
-            <input type="password" th:field="*{password2}" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="nickname" class="form-label">닉네임</label>
-            <input type="text" th:field="*{nickname}" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary">회원가입</button>
-    </form>
+<div layout:fragment="content" id="hero">
+	<div class="hero-container">
+		<h3>빠른 <strong>글 쓰기</strong>를 위한 웹 툴</h3>
+		<h1>Fast Organizer</h1>
+		<h2>"글 쓰기의 자료 수집, 조직화 과정을 간편하게 도와드립니다."</h2>
+		<a sec:authorize="isAuthenticated()" th:href="@{/work/list}" class="btn-get-started text-decoration-none">Back to list</a>
+		<a sec:authorize="isAnonymous()" th:href="@{/user/login}" class="btn-get-started">Get Started</a>
+
+		
+		<div class="modal fade" id="signupModal" aria-hidden="true" aria-labelledby="signupModalLabel" tabindex="-1">
+		  <div class="modal-dialog modal-dialog-centered">
+		    <div class="modal-content">
+		    
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="signupModalLabel"><b>Sign Up</b></h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      
+		      <div class="modal-body" id="modalBody">
+		          <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
+			        <div th:replace="form_errors :: formErrorsFragment"></div>
+			        <div class="mb-3">
+			            <label for="email" class="form-label">이메일</label>
+			            <input type="email" th:field="*{email}" class="form-control" placeholder="email@example.com">
+			        </div>
+			        <div class="mb-3">
+			            <label for="password1" class="form-label">비밀번호</label>
+			            <input type="password" th:field="*{password1}" class="form-control" placeholder="⦁ ⦁ ⦁ ⦁ ⦁ ⦁ ⦁ ⦁">
+			        </div>
+			        <div class="mb-3">
+			            <label for="password2" class="form-label">비밀번호 확인</label>
+			            <input type="password" th:field="*{password2}" class="form-control" placeholder="⦁ ⦁ ⦁ ⦁ ⦁ ⦁ ⦁ ⦁">
+			        </div>
+			        <div class="mb-3">
+			            <label for="nickname" class="form-label">닉네임</label>
+			            <input type="text" th:field="*{nickname}" class="form-control" placeholder="nickname">
+			        </div>
+			        <button type="submit" class="btn btn-primary modal-button-confirm">회원가입</button>
+			    </form>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<button class="btn" id="btnSignup" data-bs-target="#signupModal" data-bs-toggle="modal" data-bs-dismiss="modal" style="display:none;">회원가입</button>
+		
+	</div>
 </div>
+
+<script layout:fragment="script" type='text/javascript' th:inline="javascript">
+window.onload = function(){
+	document.getElementById('btnSignup').click();
+}
+</script>
 </html>

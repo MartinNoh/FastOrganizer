@@ -1,0 +1,11 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" id="hero">
+	<div class="hero-container">
+		<h3>빠른 <strong>글 쓰기</strong>를 위한 웹 툴</h3>
+		<h1>Fast Organizer</h1>
+		<h2>"글 쓰기의 자료 수집, 조직화 과정을 간편하게 도와드립니다."</h2>
+		<a sec:authorize="isAuthenticated()" th:href="@{/work/list}" class="btn-get-started text-decoration-none">Back to list</a>
+		<a sec:authorize="isAnonymous()" th:href="@{/user/login}" class="btn-get-started">Get Started</a>
+	</div>
+</div>
+</html>
