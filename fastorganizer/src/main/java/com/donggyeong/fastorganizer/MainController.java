@@ -23,7 +23,8 @@ public class MainController {
 	}
 	*/
 	@RequestMapping("/")
-	public String index(UserCreateForm userCreateForm) {
+	public String index(UserCreateForm userCreateForm, Model model) {
+		model.addAttribute("useNav", 'N');
 		return "index";
 	}
 }

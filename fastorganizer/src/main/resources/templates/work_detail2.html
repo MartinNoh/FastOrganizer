@@ -1,0 +1,188 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" id="collection" class="collection">
+	<div class="container">
+	
+	  <div class="section-title">
+	    <h2>Memo collection</h2>
+	    <h3> 메모 <span>수집</span></h3>
+	    <p>"감각기억은 우리가 눈으로 보고 듣는 모든 정보를 담지만, <br/>너무 짧아 우리가 인지하지 못하는 기억입니다."</p>
+	  </div>
+	
+	  <ul class="collection-list" id="collection-list">
+	
+	    <li>
+	      <div data-bs-toggle="collapse" class="collapsed title" href="#collection1">Non consectetur a erat nam at lectus urna duis? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+	      <div id="collection1" class="collapse">
+	        <ul class="sub-collection-list">
+	          <li>
+	            <i class="ri-check-double-line"></i>
+	            Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+	          </li>
+	          <li>
+	            <i class="ri-check-double-line"></i>
+	            Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+	          </li>
+	          <li>
+	            <i class="ri-check-double-line"></i>
+	            Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+	          </li>
+	          <li>
+	            <div class="input-div">
+	              <input type="text" class="form-control input-contents-elmt" id="addContentsValue" placeholder="상세 내용을 추가해주세요." onfocus="this.value='';">
+	              <a class="btn-learn-more input-a" type="button" onclick="addContentsList();">add</a>
+	            </div>
+	          </li>
+	        </ul>
+	      </div>
+	    </li>
+	
+	    <li>
+	      <div data-bs-toggle="collapse" class="collapsed title" href="#collection2">Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+	      <div id="collection2" class="collapse">
+	        <ul class="sub-collection-list">
+	          <li>
+	            <i class="ri-check-double-line"></i>
+	            Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+	          </li>
+	          <li>
+	            <i class="ri-check-double-line"></i>
+	            Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+	          </li>
+	          <li>
+	            <div class="input-div">
+	              <input type="text" class="form-control input-contents-elmt" id="addContentsValue" placeholder="상세 내용을 추가해주세요." onfocus="this.value='';">
+	              <a class="btn-learn-more input-a" type="button" onclick="addContentsList();">add</a>
+	            </div>
+	          </li>
+	        </ul>
+	      </div>
+	    </li>
+	
+	  </ul>
+	
+	  <div class="input-div">
+	    <input type="text" class="form-control input-elmt" id="addValue" placeholder="핵심 내용을 추가해주세요." onfocus="this.value='';">
+	    <a class="btn-learn-more input-a" type="button" onclick="addList();">ADD</a>
+	  </div>
+	
+	</div>
+</div>
+
+
+<!-- Add List -->
+<script layout:fragment="script" type='text/javascript'>
+	// 페이지 로드하면 입력 포커스
+	document.getElementById("addValue").focus();
+	
+  // 핵심 내용 추가
+  function addList()  {
+
+    // 1. title 준비
+    // 입력한 텍스트 값
+    const addValue = document.getElementById('addValue').value;
+    if(String(addValue) == "") return;
+    const textNode = document.createTextNode(addValue);
+
+    // div 생성
+    const divElmt = document.createElement("div");
+    divElmt.setAttribute("data-bs-toggle", "collapse");
+    divElmt.setAttribute("class", "collapsed title");
+
+    // li 개수 확인, divElmt id값 지정
+    const collectionList = document.getElementById('collection-list');
+    const liCnt = collectionList.childElementCount + 1;
+    divElmt.setAttribute("href", "#collection" + String(liCnt));
+
+    // i 생성
+    const iElmtShow = document.createElement("i");
+    const iElmtClose = document.createElement("i");
+    iElmtShow.setAttribute("class", "bi bi-chevron-down icon-show");
+    iElmtClose.setAttribute("class", "bi bi-chevron-up icon-close");
+
+    // div로 text node, i 추가
+    divElmt.appendChild(textNode);
+    divElmt.appendChild(iElmtShow);
+    divElmt.appendChild(iElmtClose);
+
+
+    // 2. contents 준비
+    // div 생성
+    const contentsDivElmt = document.createElement("div");
+    contentsDivElmt.setAttribute("id", "collection" + String(liCnt));
+    contentsDivElmt.setAttribute("class", "collapse show")
+
+    // ul 생성
+    const contentsUlElmt = document.createElement("ul");
+    contentsUlElmt.setAttribute("class", "sub-collection-list");
+
+    // li 생성
+    const contentsLiElmt = document.createElement("li");
+
+    // contents 추가하는 div 생성
+    const contentsInputDivElmt = document.createElement("div");
+    const contentsInputElmt = document.createElement("input");
+    const contentsInputAElmt = document.createElement("a");
+
+    contentsInputDivElmt.setAttribute("class", "input-div");
+    contentsInputElmt.setAttribute("type", "text");
+    contentsInputElmt.setAttribute("class", "form-control input-elmt");
+    contentsInputElmt.setAttribute("id", "addContents");
+    contentsInputElmt.setAttribute("placeholder", "상세 내용을 추가해주세요.");
+    contentsInputAElmt.setAttribute("type", "button")
+    contentsInputAElmt.setAttribute("class", "btn-learn-more input-a")
+    contentsInputAElmt.setAttribute("onclick", "ddList();")
+    contentsInputAElmt.appendChild(document.createTextNode("add"));
+
+
+    // 3. contents 생성
+    contentsInputDivElmt.appendChild(contentsInputElmt);
+    contentsInputDivElmt.appendChild(contentsInputAElmt);
+    contentsLiElmt.appendChild(contentsInputDivElmt);
+    contentsUlElmt.appendChild(contentsLiElmt);
+    contentsDivElmt.appendChild(contentsUlElmt);
+    
+    // 4. contents 모두 닫기
+    const contents = document.getElementsByClassName("show");
+    for(step=0; step<contents.length; step++) {
+      contents[step].classList.remove("show");
+    }
+
+    // 5. title 생성
+    const li = document.createElement("li");
+    li.appendChild(divElmt);
+    li.appendChild(contentsDivElmt);
+    document.getElementById('collection-list').appendChild(li);
+
+
+    // 5. input text foucs, 값 비우기
+    document.getElementById("addValue").focus();
+  }
+
+
+  // 상세 내용 추가
+  function addContentsList()  {
+
+    // 입력한 텍스트 값
+    const addContentsValue = document.getElementById('addContentsValue').value;
+    if(String(addContentsValue) == "") return;
+    const textNode = document.createTextNode(addContentsValue);
+
+    // li 생성
+    const liElmt = document.createElement("li");
+
+    // i 생성
+    const iElmt = document.createElement("i");
+    iElmt.setAttribute("class", "ri-check-double-line");
+
+    // div로 text node, i 추가
+    liElmt.appendChild(iElmt);
+    liElmt.appendChild(textNode);
+
+    document.getElementById('collection-list').appendChild(li);
+
+
+    // 5. input text foucs, 값 비우기
+    document.getElementById("addValue").focus();
+  }
+</script>
+</html>

@@ -60,6 +60,11 @@ public class WorkController {
 		return "work_list";
 	}
 	
+	@RequestMapping("/detail2")
+	public String detail2() {
+		return "work_detail2";
+	}
+	
 	@RequestMapping("/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id, CoreForm coreForm) {
 		Work work = this.workService.getWork(id);

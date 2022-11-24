@@ -20,12 +20,14 @@ public class UserController {
 	private final UserService userService;
 
 	@GetMapping("/signup")
-	public String signup(UserCreateForm userCreateForm) {
+	public String signup(UserCreateForm userCreateForm, Model model) {
+		model.addAttribute("useNav", 'N');
 		return "signup_form";
 	}
 	
 	@PostMapping("/signup")
 	public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult, Model model) {
+		model.addAttribute("useNav", 'N');
 		
 		if(bindingResult.hasErrors()) {
 			return "signup_form";
@@ -53,7 +55,8 @@ public class UserController {
 	}
 	
 	@GetMapping("/login")
-	public String login() {
+	public String login(Model model) {
+		model.addAttribute("useNav", 'N');
 		return "login_form";
 	}
 }

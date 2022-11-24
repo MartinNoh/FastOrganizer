@@ -33,9 +33,17 @@
 
 <body>
 
+	<!-- 네비게이션바 -->
+	<th:block th:if="!${#strings.equals(useNav, 'N')}" >
+		<nav th:replace="navbar :: navbarFragment"></nav>
+	</th:block>
+	
 	<!-- 기본 템플릿 안에 삽입될 내용 -->
 	<th:block layout:fragment="content"></th:block>
 	
+	<!-- Back to top arrow -->
+  	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  
 	<!-- 자바스크립트 -->
 	<th:block layout:fragment="script"></th:block>
 	
